@@ -5,10 +5,28 @@ body {
 h1 {
     text-align: center;
 }
-main ul li { margin-bottom: 0.5rem;}
-figure {   display: flex;
-  flex-direction: column-reverse; margin: 0; border: thin solid gray; padding: 0.5rem; justify-content: flex-end; }
-figcaption { margin-top: auto; padding-top: 0.5rem; text-align: center; font-size: 0.8rem; justify-self: flex-start;}
+
+main ul li {
+    margin-bottom: 0.5rem;
+}
+
+figure {
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 0;
+    border: thin solid gray;
+    padding: 0.5rem;
+    justify-content: flex-end;
+}
+
+figcaption {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    justify-self: flex-start;
+}
+
 .gallery {
     margin: 1rem auto;
     max-width: 900px;

@@ -1,12 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+  gallery-cdn.html: Lightbox gallery, library loaded from a CDN
+  ============================================================
+  This page shows a grid of thumbnail photos. When you click a thumbnail,
+  the litelight-js library opens the full-size photo in a "lightbox": an
+  overlay on top of the page that you can step through with the arrow keys
+  (or by swiping) and close with Escape.
+
+  The library's CSS and JavaScript come from a CDN (Content Delivery
+  Network), unpkg.com. Compare this page with gallery-local.html, which
+  loads the SAME library from a copy stored in this project's vendor/ folder.
+  The <body> of the two pages is identical. Only the two URLs in <head> change.
+-->
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8" >
+  <!-- Makes the page lay out at the device's real width on phones. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Light Gallery</title>
-  <link rel="stylesheet" href="styles/main.css" />
+
+  <!-- Our own styles: the grid layout and the figure/caption boxes. -->
+  <link rel="stylesheet" href="styles/main.css" >
+
+  <!--
+    The lightbox library's styles, loaded from the unpkg CDN.
+    unpkg serves any file from any package published on npm, using this URL pattern:
+      https://unpkg.com/<package>@<version>/<path to file>
+    Pinning an exact version (@1.2.0) means the page won't change or break
+    without warning when the library publishes a new release.
+  -->
   <link rel="stylesheet" href="https://unpkg.com/litelight-js@1.2.0/dist/lite-light.min.css">
+
+  <!--
+    type="module" makes this an ES module, so it can use `import`.
+    Module scripts are deferred automatically: they run only after the HTML
+    has been parsed. That matters here because init() needs the <img>
+    elements below to already exist when it goes looking for them.
+  -->
   <script type="module">
+    // Import the library's init function straight from the CDN.
     import { init } from 'https://unpkg.com/litelight-js@1.2.0/dist/lite-light.min.js';
+
+    // init() finds every <img> with a data-lightbox attribute and makes it
+    // open in the lightbox when clicked. With no options it uses the defaults:
+    //   imageSelector:     'img[data-lightbox]'  (which elements become clickable)
+    //   imageUrlAttribute: 'data-lightbox'       (which attribute holds the big image's URL)
     init();
   </script>
 </head>
@@ -16,25 +55,71 @@
     <h1>Glacier National Park</h1>
   </header>
   <main>
+    <!--
+      .gallery is a CSS grid with three columns (see styles/main.css).
+      Each <figure> is one cell of the grid.
+    -->
     <div class="gallery">
-      <img src="images/thumb/gnp01.jpg" data-lightbox="images/gnp01.jpg" alt="Many Glacier" />
-      <img src="images/thumb/gnp02.jpg" data-lightbox="images/gnp02.jpg" alt="Many Glacier- Aspen Grove" />
-      <img src="images/thumb/gnp03.jpg" data-lightbox="images/gnp03.jpg" alt="Logan Pass- Aster Bloom" />
-      <img src="images/thumb/gnp04.jpg" data-lightbox="images/gnp04.jpg"
-        alt="Hidden Lake- August Evening With The Goats" />
-      <img src="images/thumb/gnp05.jpg" data-lightbox="images/gnp05.jpg" alt="Lake McDonald" />
-      <img src="images/thumb/gnp06.jpg" data-lightbox="images/gnp06.jpg" alt="Sun Road- Blending In On A Blue Day" />
-      <img src="images/thumb/gnp07.jpg" data-lightbox="images/gnp07.jpg"
-        alt="Avalanche Lake- Last Light Before Winter" />
-      <img src="images/thumb/gnp08.jpg" data-lightbox="images/gnp08.jpg" alt="Windy Wild Goose Island Overlook" />
-      <img src="images/thumb/gnp09.jpg" data-lightbox="images/gnp09.jpg" alt="Saint Mary Lake Shoreline" />
+      <!--
+        Anatomy of one gallery item:
+          <figure>      groups an image with its caption as one self-contained unit.
+          <figcaption>  the visible caption. It comes BEFORE the <img> in the HTML,
+                        but main.css uses flex-direction: column-reverse so the
+                        caption is displayed BELOW the photo.
+          src           the small thumbnail image (images/thumb/) shown in the grid.
+                        Thumbnails keep the page fast to load.
+          data-lightbox the full-size image (images/) that the lightbox opens.
+                        Any attribute starting with "data-" is a custom attribute
+                        that is valid HTML. Browsers ignore it, but JavaScript can read it.
+          alt           text alternative for screen readers, and shown if the image
+                        fails to load. litelight-js also reads it for the lightbox.
+        All nine items below follow this same pattern.
+      -->
+      <figure>
+        <figcaption>Many Glacier</figcaption><img src="images/thumb/gnp01.jpg" data-lightbox="images/gnp01.jpg"
+          alt="Many Glacier" >
+      </figure>
+      <figure>
+        <figcaption>Many Glacier- Aspen Grove</figcaption><img src="images/thumb/gnp02.jpg"
+          data-lightbox="images/gnp02.jpg" alt="Many Glacier- Aspen Grove" >
+      </figure>
+      <figure>
+        <figcaption>Logan Pass- Aster Bloom</figcaption><img src="images/thumb/gnp03.jpg"
+          data-lightbox="images/gnp03.jpg" alt="Logan Pass- Aster Bloom" >
+      </figure>
+      <figure>
+        <figcaption>Hidden Lake- August Evening With The Goats</figcaption><img src="images/thumb/gnp04.jpg"
+          data-lightbox="images/gnp04.jpg" alt="Hidden Lake- August Evening With The Goats" >
+      </figure>
+      <figure>
+        <figcaption>Lake McDonald</figcaption><img src="images/thumb/gnp05.jpg" data-lightbox="images/gnp05.jpg"
+          alt="Lake McDonald" >
+      </figure>
+      <figure>
+        <figcaption>Sun Road- Blending In On A Blue Day</figcaption><img src="images/thumb/gnp06.jpg"
+          data-lightbox="images/gnp06.jpg" alt="Sun Road- Blending In On A Blue Day" >
+      </figure>
+      <figure>
+        <figcaption>Avalanche Lake- Last Light Before Winter</figcaption><img src="images/thumb/gnp07.jpg"
+          data-lightbox="images/gnp07.jpg" alt="Avalanche Lake- Last Light Before Winter" >
+      </figure>
+      <figure>
+        <figcaption>Windy Wild Goose Island Overlook</figcaption><img src="images/thumb/gnp08.jpg"
+          data-lightbox="images/gnp08.jpg" alt="Windy Wild Goose Island Overlook" >
+      </figure>
+      <figure>
+        <figcaption>Saint Mary Lake Shoreline</figcaption><img src="images/thumb/gnp09.jpg"
+          data-lightbox="images/gnp09.jpg" alt="Saint Mary Lake Shoreline" >
+      </figure>
     </div>
   </main>
   <footer>
+    <!-- href="./" links to this folder, which the browser serves as index.html. -->
     <p><a href="./">Examples</a> are from <a href="https://cs12.net/">CSCI E-12</a>, <a
         href="https://extension.harvard.edu/">Harvard Extension School</a></p>
+    <!-- Always credit your image sources, even public-domain ones. -->
     <p>Images are public domain from <a href="https://www.flickr.com/photos/glaciernps/with/23095638434/">Glacier
-        National Parker photostream on Flickr</a></p>
+        National Park photostream on Flickr</a></p>
   </footer>
 </body>
 

@@ -1,14 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+  index.html: Landing page for the litelight-js gallery example
+  =============================================================
+  This page links to the two versions of the gallery:
+    gallery-cdn.html    loads litelight-js from the unpkg.com CDN
+    gallery-local.html  loads litelight-js from the vendor/ folder in this project
+  See README.md for a walkthrough of the example.
+-->
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <title>Light Gallery</title>
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="stylesheet" href="https://unpkg.com/litelight-js@1.2.0/dist/lite-light.min.css">
-    <script type="module">
-        import { init } from 'https://unpkg.com/litelight-js@1.2.0/dist/lite-light.min.js';
-        init();
-    </script>
+    <link rel="stylesheet" href="styles/main.css" >
 </head>
 
 <body>

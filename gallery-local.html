@@ -1,13 +1,48 @@
 <!doctype html>
+<!--
+  gallery-local.html: Lightbox gallery, library loaded from a local copy
+  =====================================================================
+  This page is the same as gallery-cdn.html, with one difference: the
+  litelight-js CSS and JavaScript are loaded from files saved in this project
+  (vendor/litelight-1.2.0/) instead of from the unpkg.com CDN.
+
+  "Vendoring" a library means keeping a copy of it inside your own project.
+    + Works offline, and doesn't depend on a third-party server being up.
+    + You control exactly which files are served; nothing changes underneath you.
+    - You have to download and update the files yourself.
+    - Visitors can't reuse a copy their browser may already have cached from the CDN.
+
+  The <body> is the same as gallery-cdn.html. See the comments in that file for
+  an explanation of the figure / figcaption / img / data-lightbox markup.
+-->
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Light Gallery</title>
 
-  <link rel="stylesheet" href="styles/main.css" />
+  <!-- Our own styles: the grid layout and the figure/caption boxes. -->
+  <link rel="stylesheet" href="styles/main.css" >
+
+  <!--
+    The library's stylesheet, loaded with a RELATIVE path (relative to this
+    HTML file) instead of a full https:// URL. Putting the version number in
+    the folder name (litelight-1.2.0) makes it obvious which release you have.
+  -->
   <link rel="stylesheet" href="vendor/litelight-1.2.0/dist/lite-light.min.css">
+
   <script type="module">
+    // Inside an `import`, a local path must start with ./ or ../ (or /).
+    // A bare name like 'vendor/...' would be an error in the browser.
+    //
+    // Note: browsers won't load a module file from a file:// URL, so open this page
+    // through a web server (for example, VS Code's Live Server extension),
+    // not by double-clicking the file.
     import { init } from './vendor/litelight-1.2.0/dist/lite-light.min.js';
+
+    // Attach the lightbox to every img[data-lightbox] on the page.
     init();
   </script>
 
@@ -18,28 +53,57 @@
     <h1>Glacier National Park</h1>
   </header>
   <main>
+    <!-- A three-column CSS grid of <figure> items (see styles/main.css). -->
     <div class="gallery">
-      <img src="images/thumb/gnp01.jpg" data-lightbox="images/gnp01.jpg" alt="Many Glacier" />
-      <img src="images/thumb/gnp02.jpg" data-lightbox="images/gnp02.jpg" alt="Many Glacier- Aspen Grove" />
-      <img src="images/thumb/gnp03.jpg" data-lightbox="images/gnp03.jpg" alt="Logan Pass- Aster Bloom" />
-      <img src="images/thumb/gnp04.jpg" data-lightbox="images/gnp04.jpg"
-        alt="Hidden Lake- August Evening With The Goats" />
-      <img src="images/thumb/gnp05.jpg" data-lightbox="images/gnp05.jpg" alt="Lake McDonald" />
-      <img src="images/thumb/gnp06.jpg" data-lightbox="images/gnp06.jpg" alt="Sun Road- Blending In On A Blue Day" />
-      <img src="images/thumb/gnp07.jpg" data-lightbox="images/gnp07.jpg"
-        alt="Avalanche Lake- Last Light Before Winter" />
-      <img src="images/thumb/gnp08.jpg" data-lightbox="images/gnp08.jpg" alt="Windy Wild Goose Island Overlook" />
-      <img src="images/thumb/gnp09.jpg" data-lightbox="images/gnp09.jpg" alt="Saint Mary Lake Shoreline" />
+      <!--
+        src           = thumbnail shown in the grid
+        data-lightbox = full-size image opened in the lightbox
+        alt           = text alternative (screen readers, failed loads)
+      -->
+      <figure>
+        <figcaption>Many Glacier</figcaption><img src="images/thumb/gnp01.jpg" data-lightbox="images/gnp01.jpg"
+          alt="Many Glacier" >
+      </figure>
+      <figure>
+        <figcaption>Many Glacier- Aspen Grove</figcaption><img src="images/thumb/gnp02.jpg"
+          data-lightbox="images/gnp02.jpg" alt="Many Glacier- Aspen Grove" >
+      </figure>
+      <figure>
+        <figcaption>Logan Pass- Aster Bloom</figcaption><img src="images/thumb/gnp03.jpg"
+          data-lightbox="images/gnp03.jpg" alt="Logan Pass- Aster Bloom" >
+      </figure>
+      <figure>
+        <figcaption>Hidden Lake- August Evening With The Goats</figcaption><img src="images/thumb/gnp04.jpg"
+          data-lightbox="images/gnp04.jpg" alt="Hidden Lake- August Evening With The Goats" >
+      </figure>
+      <figure>
+        <figcaption>Lake McDonald</figcaption><img src="images/thumb/gnp05.jpg" data-lightbox="images/gnp05.jpg"
+          alt="Lake McDonald" >
+      </figure>
+      <figure>
+        <figcaption>Sun Road- Blending In On A Blue Day</figcaption><img src="images/thumb/gnp06.jpg"
+          data-lightbox="images/gnp06.jpg" alt="Sun Road- Blending In On A Blue Day" >
+      </figure>
+      <figure>
+        <figcaption>Avalanche Lake- Last Light Before Winter</figcaption><img src="images/thumb/gnp07.jpg"
+          data-lightbox="images/gnp07.jpg" alt="Avalanche Lake- Last Light Before Winter" >
+      </figure>
+      <figure>
+        <figcaption>Windy Wild Goose Island Overlook</figcaption><img src="images/thumb/gnp08.jpg"
+          data-lightbox="images/gnp08.jpg" alt="Windy Wild Goose Island Overlook" >
+      </figure>
+      <figure>
+        <figcaption>Saint Mary Lake Shoreline</figcaption><img src="images/thumb/gnp09.jpg"
+          data-lightbox="images/gnp09.jpg" alt="Saint Mary Lake Shoreline" >
+      </figure>
     </div>
   </main>
   <footer>
     <p><a href="./">Examples</a> are from <a href="https://cs12.net/">CSCI E-12</a>, <a
         href="https://extension.harvard.edu/">Harvard Extension School</a></p>
     <p>Images are public domain from <a href="https://www.flickr.com/photos/glaciernps/with/23095638434/">Glacier
-        National Parker photostream on Flickr</a></p>
+        National Park photostream on Flickr</a></p>
   </footer>
-
-
 
 </body>
 

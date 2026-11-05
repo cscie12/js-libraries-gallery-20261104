@@ -5,7 +5,10 @@ body {
 h1 {
     text-align: center;
 }
-
+main ul li { margin-bottom: 0.5rem;}
+figure {   display: flex;
+  flex-direction: column-reverse; margin: 0; border: thin solid gray; padding: 0.5rem; justify-content: flex-end; }
+figcaption { margin-top: auto; padding-top: 0.5rem; text-align: center; font-size: 0.8rem; justify-self: flex-start;}
 .gallery {
     margin: 1rem auto;
     max-width: 900px;
@@ -18,6 +21,21 @@ h1 {
 .gallery img {
     max-width: 100%;
 }
-footer { margin-top: 1.5rem; padding-top: 0.5rem; border-top: thin solid gray;}
-a:link, a:visited, a:hover, a:active { color: blue; text-decoration: none; }
-a:hover { text-decoration: underline;}
+
+footer {
+    margin-top: 1.5rem;
+    padding-top: 0.5rem;
+    border-top: thin solid gray;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,23 @@
+body {
+    font-family: arial, helvetica, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.gallery {
+    margin: 1rem auto;
+    max-width: 900px;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.gallery img {
+    max-width: 100%;
+}
+footer { margin-top: 1.5rem; padding-top: 0.5rem; border-top: thin solid gray;}
+a:link, a:visited, a:hover, a:active { color: blue; text-decoration: none; }
+a:hover { text-decoration: underline;}
